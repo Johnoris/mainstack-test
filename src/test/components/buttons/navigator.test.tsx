@@ -18,7 +18,7 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('Navigator', () => {
-  it('renders the button with the provided name', () => {
+  it('renders currect button name', () => {
     const { getByText } = render(
         <TestLayout>
             <Navigator icon={<span>Icon</span>} name="Home" route="/home" />
@@ -28,7 +28,7 @@ describe('Navigator', () => {
     expect(getByText('Home')).toBeInTheDocument();
   });
 
-  it('applies the active class when the route matches the current location', () => {
+  it('applies the active class when the route is current location', () => {
     mockedNavigator('/home')
 
     const { getByText } = render(
@@ -40,7 +40,7 @@ describe('Navigator', () => {
     expect(getByText('Home')).toHaveClass('!bg-black300 !text-white');
   });
 
-  it('calls the router function when the button is clicked', () => {
+  it('calls router when button is clicked', () => {
     const { getByText } = render(
         <TestLayout>
             <Navigator icon={<span>Icon</span>} name="Home" route="/home" />

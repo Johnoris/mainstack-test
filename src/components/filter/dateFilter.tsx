@@ -14,6 +14,7 @@ const DateFilter = ({ startDate, setStartDate, endDate, setEndDate }: {
     endDate: DateObject| DateObject[] | null | any,
     setEndDate: Dispatch<SetStateAction<DateObject| DateObject[] | null | any>>,
 }) => {
+    //dates
     const today = new Date()
     const yesterday = new Date()
     const tomorrow = new Date()
@@ -73,7 +74,10 @@ const DateFilter = ({ startDate, setStartDate, endDate, setEndDate }: {
                     dateFilterOptions.length > 0 &&
                     dateFilterOptions.map((date: IDatePayload, index: number) => {
                         return(
-                            <button key={index} className={`whitespace-nowrap rounded-[100px] border border-gray50 py-2.5 px-[18px] ${ (activeRange === date.label || ( date?.endDate?.toLocaleDateString() === new Date(endDate)?.toLocaleDateString() && date?.startDate?.toLocaleDateString() === new Date(startDate)?.toLocaleDateString() ) ) && '!border-none !bg-black300 !text-white' }`} onClick={() => { setStartDate(date.startDate); setEndDate(date.endDate); setActiveRange(date.label)}}>
+                            <button 
+                                key={index} 
+                                //Also rendering buttons as active when start date and end date match the range for the button
+                                className={`whitespace-nowrap rounded-[100px] border border-gray50 py-2.5 px-[18px] ${ (activeRange === date.label || ( date?.endDate?.toLocaleDateString() === new Date(endDate)?.toLocaleDateString() && date?.startDate?.toLocaleDateString() === new Date(startDate)?.toLocaleDateString() ) ) && '!border-none !bg-black300 !text-white' }`} onClick={() => { setStartDate(date.startDate); setEndDate(date.endDate); setActiveRange(date.label)}}>
                                 {date.label}
                             </button>
                         )
@@ -85,33 +89,42 @@ const DateFilter = ({ startDate, setStartDate, endDate, setEndDate }: {
                     <h6 className="text-black300 text-base font-semibold -tracking-[0.4px]">Date Range</h6>
                 </div>
                 <div className="grid grid-cols-2 gap-[6px] mt-[3px]">
-                    <DatePicker
-                        value={ endDate ? startDate < endDate ? startDate : endDate : startDate}
-                        onChange={(value) => { setActiveRange('none'); setStartDate(value)}}
-                        inputClass={`bg-gray50 px-4 py-[14px] rounded-[12px] border-[3px] border-gray50 flex justify-between cursor-pointer no-outline w-full focus:border-black300' }`} 
-                        className="green"
-                        mapDays={({ date }: any) => {
-                            if(date > tomorrow){
-                                return{
-                                    disabled: true,
-                                    style: { color: "#ccc" },
+                    <div data-testid="start-date-picker">
+                        <DatePicker
+                            //allows switching to correct positions if end date comes before start date
+                            value={ endDate ? startDate < endDate ? startDate : endDate : startDate}
+                            onChange={(value) => { setActiveRange('none'); setStartDate(value)}}
+                            inputClass={`bg-gray50 px-4 py-[14px] rounded-[12px] border-[3px] border-gray50 flex justify-between cursor-pointer no-outline w-full focus:border-black300' }`} 
+                            className="green"
+                            //disable future date
+                            mapDays={({ date }: any) => {
+                                if(date > tomorrow){
+                                    return{
+                                        disabled: true,
+                                        style: { color: "#ccc" },
+                                    }
                                 }
-                            }
-                        }}
-                    />
-                    <DatePicker
-                        value={ endDate ? endDate > startDate ? endDate : startDate : endDate}
-                        onChange={(value) => { setActiveRange('none'); setEndDate(value)}}
-                        inputClass={`bg-gray50 px-4 py-[14px] rounded-[12px] border-[3px] border-gray50 flex justify-between cursor-pointer no-outline w-full focus:border-black300' }`} 
-                        mapDays={({ date }: any) => {
-                            if(date > tomorrow){
-                                return{
-                                    disabled: true,
-                                    style: { color: "#ccc" },
+                            }}
+                            
+                        />
+                    </div>
+                    <div data-testid="end-date-picker">
+                        <DatePicker
+                            //allows switching to correct positions if end date comes before start date
+                            value={ endDate ? endDate > startDate ? endDate : startDate : endDate}
+                            onChange={(value) => { setActiveRange('none'); setEndDate(value)}}
+                            inputClass={`bg-gray50 px-4 py-[14px] rounded-[12px] border-[3px] border-gray50 flex justify-between cursor-pointer no-outline w-full focus:border-black300' }`} 
+                            //disable future dates
+                            mapDays={({ date }: any) => {
+                                if(date > tomorrow){
+                                    return{
+                                        disabled: true,
+                                        style: { color: "#ccc" },
+                                    }
                                 }
-                            }
-                        }}
-                    />
+                            }}
+                        />
+                    </div>
                 </div>
             </div>
         </div>

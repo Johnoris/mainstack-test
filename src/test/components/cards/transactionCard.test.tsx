@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import TransactionCard from '@/components/cards/transactionCard';
 
 describe('TransactionCard Component', () => {
-  it('renders transaction card with the provided data', () => {
+  it('renders correct data', () => {
     const sampleTransaction = {
       description: 'Sample Transaction',
       recipient: 'John Doe',

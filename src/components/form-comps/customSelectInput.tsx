@@ -36,6 +36,7 @@ const CustomSelectInput = ({ options, selectedOptions, setSelectedOptions, label
                         {
                             options.length > 0 && options.map((option: string, index) => {
                                 return(
+                                // add to selectedOptions array if non-existent and remove if it exists
                                 <div className="p-[14px] flex gap-3 items-center cursor-pointer w-full" key={index} onClick={() =>  selectedOptions.includes(option) ?  setSelectedOptions(prev => prev.filter( currentOption => currentOption !== option )) : setSelectedOptions(prev => [...prev,option])  }>
                                     {
                                         selectedOptions.includes(option)

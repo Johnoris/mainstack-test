@@ -4,13 +4,12 @@ import SideBarNavigator from '@/components/buttons/sideBarNavigator';
 
 describe('SideBarNavigator Component', () => {
   it('renders the button with the provided icon', () => {
-    // Define a sample icon for testing (e.g., a div with some text)
+    // sample test iccon
     const testIcon = <div>Test Icon</div>;
 
-    // Render the SideBarNavigator with the test icon
     render(<SideBarNavigator icon={testIcon} />);
 
-    // Use screen queries to assert that the button and icon are in the DOM
+    // check if buttons are in DOM
     const button = screen.getByRole('button');
     const icon = screen.getByText('Test Icon');
 

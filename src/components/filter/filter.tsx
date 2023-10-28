@@ -36,8 +36,8 @@ const Filter = ({ filterActive, setFilterActive, reference, startDate, setStartD
 
     
     return(
-        <div className={`flex items-end justify-end h-[100dvh] w-screen fixed top-0 left-0 p-8 z-40 bg-[rgba(0,0,0,0.5)] ${ !filterActive && '!left-[100vw]' }`} >
-            <div className="shadow-thickShadow backdrop max-w-[456px] w-full rounded-[20px] flex flex-col justify-between bg-white h-[80dvh] max-h-[876px]" ref={reference}>
+        <div className={`flex items-end justify-end h-[100dvh] w-screen fixed top-0 left-0 p-8 z-40 bg-[rgba(0,0,0,0.5)] ${ !filterActive && '!left-[100vw]' }`} data-testid="filter-modal">
+            <div className="shadow-thickShadow backdrop max-w-[456px] w-full rounded-[20px] flex flex-col justify-between bg-white h-[80dvh] max-h-[876px]" ref={reference} >
                 <div>
                     <div className="flex justify-between items-center py-5 px-[22px]">
                         <div>
@@ -69,6 +69,7 @@ const Filter = ({ filterActive, setFilterActive, reference, startDate, setStartD
                     <button className="py-3 border border-gray50 w-1/2 text-black300 text-base font-semibold leading-[24px] tracking-[0.4px] rounded-[100px]" onClick={() => { clearFilters(); setFilterActive(false)}}>Clear</button>
                     <button 
                         className="bg-black300 py-3 w-1/2 text-white text-base font-semibold leading-[24px] tracking-[0.4px] rounded-[100px]" 
+                        //check for which filter exists and update state where necessary
                         onClick={() => {  
                             startDate && endDate ? setDateFilterInfo({ dateActive: true, dateLowerLimit: startDate, dateUpperLimit: endDate }) : setDateFilterInfo({ dateActive: false, dateLowerLimit: null, dateUpperLimit: null })
                             selectedTransactionTypes.length > 0 ? setTypeFilterInfo({ typeActive: true, typeArray: selectedTransactionTypes }) : setTypeFilterInfo({ typeActive: false, typeArray: [] })

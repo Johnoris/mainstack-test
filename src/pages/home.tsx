@@ -48,8 +48,8 @@ const Home = () => {
     const clearFilters = () => {
         setSelectedTransactionTypes([])
         setSelectedTransactionStatus([])
-        setStartDate(new Date())
-        setEndDate(new Date())
+        setEndDate(null)
+        setStartDate(null)
         setDateFilterInfo({
             dateActive: false,
             dateUpperLimit: '',
@@ -112,6 +112,8 @@ const Home = () => {
         }
     },[ statusFilterInfo?.statusArray ])
 
+    //check if filters are applied 
+    const filtersApplied = [dateFilterInfo.dateActive, typeFilterInfo?.typeActive, statusFilterInfo?.statusActive]?.filter(Boolean)?.length > 0
     return(
         <div className="max-w-[1160px] mx-auto pt-[144px]">
             <Filter 
@@ -198,19 +200,24 @@ const Home = () => {
                             <h3 className="text-black300 text-[24px] font-bold leading-[32px] -tracking-[0.6px]">
                                 { 
                                     transactionsLoading 
-                                    ? '**' 
-                                    : [dateFilterInfo.dateActive, typeFilterInfo?.typeActive, statusFilterInfo?.statusActive]?.filter(Boolean)?.length > 0 ? filteredTransactions?.length : transactions?.length
+                                        ? 
+                                        '**' 
+                                        :
+                                        //render transactions lengh | reder filtered transactions length if filters are applied 
+                                        filtersApplied ? filteredTransactions?.length : transactions?.length
                                 } 
                                 {" "}Transactions
                             </h3>
                         </div>
+                        {/* render correct time range | show all time if there is no time range */}
                         <div><p className="text-gray400 text-sm font-medium leading-[16px] -tracking-[0.2px]">{ dateFilterInfo?.dateActive ? `Your transactions from ${formatDate(dateFilterInfo?.dateLowerLimit)} to ${formatDate(dateFilterInfo?.dateUpperLimit)}` : "Your transactions for all time"}</p></div>
                     </div>
                     <div className="flex gap-3">
                         <button className="flex items-center py-3 pl-[30px] pr-[20px] bg-gray50 rounded-[100px] gap-1 items-center text-base font-semibold -tracking-[0.4px]" onClick={() => setFilterActive(true)}>
                             Filter
                             { 
-                                [dateFilterInfo.dateActive, typeFilterInfo?.typeActive, statusFilterInfo?.statusActive]?.filter(Boolean)?.length > 0 && 
+                                //check if filters applied and render lenght in button where necessary
+                                filtersApplied && 
                                 <div className="w-5 h-5 rounded-full bg-black300 flex items-center justify-center">
                                     <h5 className="text-xs font-medium text-white -tracking-[0.4px]">{[dateFilterInfo.dateActive, typeFilterInfo?.typeActive, statusFilterInfo?.statusActive]?.filter(Boolean)?.length}</h5>
                                 </div>
@@ -235,7 +242,8 @@ const Home = () => {
                                 <TransactionCardLoader/>
                             </Fragment>
                             :
-                            [dateFilterInfo.dateActive, typeFilterInfo?.typeActive, statusFilterInfo?.statusActive]?.filter(Boolean)?.length > 0 
+                            //check if filters are applied and render filtered data else render transactions
+                            filtersApplied
                                 ?
                                 filteredTransactions.length > 0
                                     ?
