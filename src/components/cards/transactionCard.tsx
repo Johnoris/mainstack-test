@@ -11,7 +11,7 @@ const TransactionCard = ({ description, recipient, amount, date, outflow }: {
     return(
         <div className="flex justify-between">
             <div className="flex items-center gap-[14.5px]">
-                <div className={`w-12 h-12 rounded-full flex items-center justify-center bg-green100 fill-green500 ${ outflow && '!rotate-180 !bg-red100 !fill-red400' }`}>
+                <div className={`w-12 h-12 rounded-full flex items-center justify-center bg-green100 fill-green500 ${ outflow && '!rotate-180 !bg-red100 !fill-red400' }`} data-testid="arrow">
                     <FULL_ARROW/>
                 </div>
                 <div className="flex flex-col gap-[9px]">

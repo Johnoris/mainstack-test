@@ -8,7 +8,7 @@ import { DateObject } from "react-multi-date-picker";
 const Filter = ({ filterActive, setFilterActive, reference, startDate, setStartDate, endDate, setEndDate, clearFilters, selectedTransactionTypes, setSelectedTransactionTypes, selectedTransactionStatus, setSelectedTransactionStatus, setDateFilterInfo, setStatusFilterInfo, setTypeFilterInfo}: { 
     filterActive: boolean,
     setFilterActive: Dispatch<SetStateAction<boolean>>,
-    reference: RefObject<HTMLDivElement>,
+    reference: RefObject<HTMLDivElement> | null,
     startDate: DateObject | DateObject[] | null | any,
     endDate: DateObject | DateObject[] | null | any,
     setStartDate: Dispatch<SetStateAction<DateObject | DateObject[] | null | any>>,

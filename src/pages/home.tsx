@@ -204,7 +204,7 @@ const Home = () => {
                                 {" "}Transactions
                             </h3>
                         </div>
-                        <div><p className="text-gray400 text-sm font-medium leading-[16px] -tracking-[0.2px]">Your transactions for the last 7 days</p></div>
+                        <div><p className="text-gray400 text-sm font-medium leading-[16px] -tracking-[0.2px]">{ dateFilterInfo?.dateActive ? `Your transactions from ${formatDate(dateFilterInfo?.dateLowerLimit)} to ${formatDate(dateFilterInfo?.dateUpperLimit)}` : "Your transactions for all time"}</p></div>
                     </div>
                     <div className="flex gap-3">
                         <button className="flex items-center py-3 pl-[30px] pr-[20px] bg-gray50 rounded-[100px] gap-1 items-center text-base font-semibold -tracking-[0.4px]" onClick={() => setFilterActive(true)}>

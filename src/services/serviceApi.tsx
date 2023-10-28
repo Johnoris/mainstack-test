@@ -2,7 +2,7 @@
 import axios, { AxiosInstance } from "axios";
 import { toast } from "react-toastify";
 
-export const baseURL = import.meta.env.VITE_APP_API_URL;
+export const baseURL = process.env.VITE_APP_API_URL;
 
 
 const axiosConfig = {

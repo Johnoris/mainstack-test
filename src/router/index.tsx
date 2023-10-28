@@ -1,4 +1,3 @@
-import Filter from "@/components/filter/filter";
 import DashboardLayout from "@/layout/dashboardLayout";
 import Home from "@/pages/home"
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
@@ -15,7 +14,6 @@ const Router = () => {
                     <Route path='/crm' element={<Home/>}/>
                     <Route path='/apps' element={<Home/>}/>
                 </Route>
-                <Route path='/filter' element={<Filter/>}/>
             </Routes>
         </BrowserRouter>
     )
