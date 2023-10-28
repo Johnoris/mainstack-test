@@ -14,7 +14,7 @@ const Navigator = ({ icon, name, route }: INavigatorProps) => {
 
     return(
         <button onClick={() => router(route)} className={`flex items-center pl-[14px] pr-[18px] py-2 rounded-[100px] gap-1 text-gray400 ${ isActive && '!bg-black300 !text-white' }`}>
-            <span data-testid={name.toLowerCase()+"-icon"} className={`w-max ${isActive ? 'fill-white100' : 'fill-gray400' }`}>{icon}</span>
+            <span data-testid={name.toLowerCase()+"-icon"} className={`w-max fill-white100 ${!isActive && '!fill-gray400' }`}>{icon}</span>
             {name}
         </button>
     )
