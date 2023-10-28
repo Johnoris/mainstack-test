@@ -66,8 +66,9 @@ const Filter = ({ filterActive, setFilterActive, reference, startDate, setStartD
                     </div>
                 </div>
                 <div className="flex gap-3 px-6 py-5">
-                    <button className="py-3 border border-gray50 w-1/2 text-black300 text-base font-semibold leading-[24px] tracking-[0.4px] rounded-[100px]" onClick={() => { clearFilters(); setFilterActive(false)}}>Clear</button>
+                    <button className="py-3 border border-gray50 w-1/2 text-black300 text-base font-semibold leading-[24px] tracking-[0.4px] rounded-[100px]" data-testid="clear-filter-button" onClick={() => { clearFilters(); setFilterActive(false)}}>Clear</button>
                     <button 
+                        data-testid="filter-button"
                         className="bg-black300 py-3 w-1/2 text-white text-base font-semibold leading-[24px] tracking-[0.4px] rounded-[100px]" 
                         //check for which filter exists and update state where necessary
                         onClick={() => {  

@@ -5,7 +5,7 @@ import TransactionsGraph from "@/components/charts/transactionsGraph";
 import Filter from "@/components/filter/filter";
 import TransactionCardLoader from "@/components/skeleton-loaders/cards/transactionCardLoader";
 import formatDate from "@/helpers/formatDate";
-import useFetchWalletDetails from "@/hooks/api/useFecthWalletDetails";
+import useFetchWalletDetails from "@/hooks/api/useFetchWalletDetails";
 import useFetchAllTransactions, { IPaymentDetails } from "@/hooks/api/useFetchAllTransactions";
 import useCloseOnExternalClick from "@/hooks/useCloseOnExternalClick";
 import { Fragment, useEffect, useRef, useState } from "react";
@@ -213,7 +213,7 @@ const Home = () => {
                         <div><p className="text-gray400 text-sm font-medium leading-[16px] -tracking-[0.2px]">{ dateFilterInfo?.dateActive ? `Your transactions from ${formatDate(dateFilterInfo?.dateLowerLimit)} to ${formatDate(dateFilterInfo?.dateUpperLimit)}` : "Your transactions for all time"}</p></div>
                     </div>
                     <div className="flex gap-3">
-                        <button className="flex items-center py-3 pl-[30px] pr-[20px] bg-gray50 rounded-[100px] gap-1 items-center text-base font-semibold -tracking-[0.4px]" onClick={() => setFilterActive(true)}>
+                        <button className="flex items-center py-3 pl-[30px] pr-[20px] bg-gray50 rounded-[100px] gap-1 items-center text-base font-semibold -tracking-[0.4px]" onClick={() => setFilterActive(true)} data-testid="open-filter-button">
                             Filter
                             { 
                                 //check if filters applied and render lenght in button where necessary
