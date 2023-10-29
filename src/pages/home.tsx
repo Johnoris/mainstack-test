@@ -247,9 +247,9 @@ const Home = () => {
                                 ?
                                 filteredTransactions.length > 0
                                     ?
-                                    filteredTransactions.map((transaction:IPaymentDetails) => {
+                                    filteredTransactions.map((transaction:IPaymentDetails, index) => {
                                         return(
-                                            <TransactionCard amount={Number(transaction?.amount)} date={formatDate(transaction?.date)} description={transaction?.metadata?.product_name || transaction?.metadata?.type || "Nil"} recipient={transaction?.metadata?.name || "Nil"} outflow={transaction?.type === 'withdrawal'}/>
+                                            <TransactionCard key={index} amount={Number(transaction?.amount)} date={formatDate(transaction?.date)} description={transaction?.metadata?.product_name || transaction?.metadata?.type || "Nil"} recipient={transaction?.metadata?.name || "Nil"} outflow={transaction?.type === 'withdrawal'}/>
                                         )
                                     })
                                     :
@@ -274,9 +274,9 @@ const Home = () => {
                                 :
                                 transactions.length > 0
                                     ?
-                                    transactions.map((transaction:IPaymentDetails) => {
+                                    transactions.map((transaction:IPaymentDetails, index) => {
                                         return(
-                                            <TransactionCard amount={Number(transaction?.amount)} date={formatDate(transaction?.date)} description={transaction?.metadata?.product_name || transaction?.metadata?.type || "Nil"} recipient={transaction?.metadata?.name || "Nil"} outflow={transaction?.type === 'withdrawal'}/>
+                                            <TransactionCard key={index} amount={Number(transaction?.amount)} date={formatDate(transaction?.date)} description={transaction?.metadata?.product_name || transaction?.metadata?.type || "Nil"} recipient={transaction?.metadata?.name || "Nil"} outflow={transaction?.type === 'withdrawal'}/>
                                         )
                                     })
                                     :
