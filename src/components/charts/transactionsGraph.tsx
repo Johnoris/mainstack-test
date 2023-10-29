@@ -35,7 +35,7 @@ const TransactionsGraph = ({ transactions, transctionsLoading }: {
             }
         }
         const mergedPayments = Object.keys(dateMap).map(date => ({
-            date,
+            date: formatDate(date),
             amount: dateMap[date]
         }));
     
@@ -57,7 +57,7 @@ const TransactionsGraph = ({ transactions, transctionsLoading }: {
                 }}
                 >
                 <XAxis dataKey="date" className='hidden'/>
-                <Tooltip />
+                <Tooltip formatter={(value) => ['USD ' + value]} />
                 <Line type="monotone" dataKey="amount" stroke="#FF5403" dot={false}/>
                 </LineChart>
             </ResponsiveContainer>
