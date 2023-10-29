@@ -11,7 +11,7 @@ const Nav = () => {
                 <div data-testid="logo">
                     <LOGO/>
                 </div>
-                <div className="flex gap-5">
+                <div className="flex gap-5 no-transition">
                     <Navigator icon={<HOME_ICON/>} name="Home" route="/home"/>
                     <Navigator icon={<ANALYSIS_ICON/>} name="Analytics" route="/analytics"/>
                     <Navigator icon={<REVENUE_ICON/>} name="Revenue" route="/revenue"/>
