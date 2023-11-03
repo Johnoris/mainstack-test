@@ -81,7 +81,7 @@ const Home = () => {
             console.log({filteredByDate})
             console.log({filteredByType})
             console.log({filteredByStatus})
-            return (dateFilterInfo.dateActive ? filteredByDate : true) && (typeFilterInfo?.typeActive ? filteredByType : true) && ( statusFilterInfo?.statusActive ? filteredByStatus : true);
+            return ( (startDate && endDate) ? filteredByDate : true) && (selectedTransactionTypes?.length > 0 ? filteredByType : true) && ( selectedTransactionStatus?.length > 0 ? filteredByStatus : true);
           })
         );
     };
