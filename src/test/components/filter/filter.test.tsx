@@ -21,6 +21,7 @@ describe('Filter Component', () => {
         setDateFilterInfo={() => {}}
         setStatusFilterInfo={() => {}}
         setTypeFilterInfo={() => {}}
+        onFilter={() => {}}
       />
     );
 
@@ -46,6 +47,7 @@ describe('Filter Component', () => {
         setDateFilterInfo={() => {}}
         setStatusFilterInfo={() => {}}
         setTypeFilterInfo={() => {}}
+        onFilter={() => {}}
       />
     );
 
@@ -76,6 +78,7 @@ describe('Filter Component', () => {
         setDateFilterInfo={mockSetDateFilterInfo}
         setStatusFilterInfo={mockSetStatusFilterInfo}
         setTypeFilterInfo={mockSetTypeFilterInfo}
+        onFilter={() => {}}
       />
     );
 
@@ -120,6 +123,7 @@ describe('Filter Component', () => {
         setDateFilterInfo={() => {}}
         setStatusFilterInfo={() => {}}
         setTypeFilterInfo={() => {}}
+        onFilter={() => {}}
       />
     );
 
@@ -150,6 +154,7 @@ describe('Filter Component', () => {
         setDateFilterInfo={mockSetDateFilterInfo}
         setStatusFilterInfo={() => {}}
         setTypeFilterInfo={() => {}}
+        onFilter={() => {}}
       />
     );
 
@@ -183,6 +188,7 @@ describe('Filter Component', () => {
         setDateFilterInfo={mockSetDateFilterInfo}
         setStatusFilterInfo={() => {}}
         setTypeFilterInfo={() => {}}
+        onFilter={() => {}}
       />
     );
 
