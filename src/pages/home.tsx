@@ -67,7 +67,7 @@ const Home = () => {
 
     const filterWithDate = () => {
         setFilteredTransactions(
-            transactions.filter((transaction) => {
+            (filterActive ? filteredTransactions : transactions).filter((transaction) => {
               // Convert date strings to Date objects for comparison
               const transactionDate = new Date(transaction.date);
               const upperLimitDate = new Date(dateFilterInfo.dateUpperLimit);
@@ -83,12 +83,12 @@ const Home = () => {
 
     const filterWithType = () => {
         //convert text to uppercase for comparison and filter with the set typeArray
-        setFilteredTransactions(transactions.filter(transaction => typeFilterInfo.typeArray?.includes( transaction?.type?.charAt(0).toUpperCase() + transaction?.type?.slice(1))))
+        setFilteredTransactions((filterActive ? filteredTransactions : transactions).filter(transaction => typeFilterInfo.typeArray?.includes( transaction?.type?.charAt(0).toUpperCase() + transaction?.type?.slice(1))))
     }
 
     const filterWithStatus = () => {
         //convert text to uppercase for comparison and filter with the set statusArray
-        setFilteredTransactions(transactions.filter(transaction => statusFilterInfo.statusArray?.includes(transaction?.status?.charAt(0).toUpperCase() + transaction?.status?.slice(1))))
+        setFilteredTransactions((filterActive ? filteredTransactions : transactions).filter(transaction => statusFilterInfo.statusArray?.includes(transaction?.status?.charAt(0).toUpperCase() + transaction?.status?.slice(1))))
     }
 
     //check for changes in upper and lower date limit and filter if bot limits exist 
