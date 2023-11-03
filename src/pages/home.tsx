@@ -8,7 +8,7 @@ import formatDate from "@/helpers/formatDate";
 import useFetchWalletDetails from "@/hooks/api/useFetchWalletDetails";
 import useFetchAllTransactions, { IPaymentDetails } from "@/hooks/api/useFetchAllTransactions";
 import useCloseOnExternalClick from "@/hooks/useCloseOnExternalClick";
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 import { DateObject } from "react-multi-date-picker";
 
 const Home = () => {
@@ -65,52 +65,26 @@ const Home = () => {
         })
     }
 
-    const filterWithDate = () => {
+    const filterTransactions = () => {
         setFilteredTransactions(
-            (filtersApplied ? filteredTransactions : transactions).filter((transaction) => {
-              // Convert date strings to Date objects for comparison
-              const transactionDate = new Date(transaction.date);
-              const upperLimitDate = new Date(dateFilterInfo.dateUpperLimit);
-              const lowerLimitDate = new Date(dateFilterInfo.dateLowerLimit);
+          transactions.filter((transaction) => {
+            const transactionDate = new Date(transaction.date);
+            const upperLimitDate = new Date(endDate);
+            const lowerLimitDate = new Date(startDate);
 
-              // Check if the transaction date is within the limit range
-              return (
-                transactionDate >= lowerLimitDate && transactionDate <= upperLimitDate
-              );
-            })
-          );
-    }
+            const filteredByDate = transactionDate >= lowerLimitDate && transactionDate <= upperLimitDate;
 
-    const filterWithType = () => {
-        //convert text to uppercase for comparison and filter with the set typeArray
-        setFilteredTransactions((filtersApplied ? filteredTransactions : transactions).filter(transaction => typeFilterInfo.typeArray?.includes( transaction?.type?.charAt(0).toUpperCase() + transaction?.type?.slice(1))))
-    }
+            const filteredByType = selectedTransactionTypes?.includes(transaction?.type?.charAt(0).toUpperCase() + transaction?.type?.slice(1));
 
-    const filterWithStatus = () => {
-        //convert text to uppercase for comparison and filter with the set statusArray
-        setFilteredTransactions((filtersApplied ? filteredTransactions : transactions).filter(transaction => statusFilterInfo.statusArray?.includes(transaction?.status?.charAt(0).toUpperCase() + transaction?.status?.slice(1))))
-    }
+            const filteredByStatus = selectedTransactionStatus?.includes(transaction?.status?.charAt(0).toUpperCase() + transaction?.status?.slice(1));
 
-    //check for changes in upper and lower date limit and filter if bot limits exist 
-    useEffect(() => {
-        if(dateFilterInfo?.dateUpperLimit && dateFilterInfo?.dateLowerLimit){
-            filterWithDate()
-        }
-    },[ dateFilterInfo.dateLowerLimit, dateFilterInfo.dateUpperLimit ])
-
-    //check for changes to typeArray and filter if array is not empty
-    useEffect(() => {
-        if(typeFilterInfo?.typeArray?.length){
-            typeFilterInfo?.typeArray?.length > 0 && filterWithType()
-        }
-    },[ typeFilterInfo.typeArray ])
-
-    //check for changes to statusArray and filter if array is not empty
-    useEffect(() => {
-        if(statusFilterInfo?.statusArray?.length){
-            statusFilterInfo?.statusArray?.length > 0 && filterWithStatus()
-        }
-    },[ statusFilterInfo?.statusArray ])
+            console.log({filteredByDate})
+            console.log({filteredByType})
+            console.log({filteredByStatus})
+            return (dateFilterInfo.dateActive ? filteredByDate : true) && (typeFilterInfo?.typeActive ? filteredByType : true) && ( statusFilterInfo?.statusActive ? filteredByStatus : true);
+          })
+        );
+    };
 
     //check if filters are applied 
     const filtersApplied = [dateFilterInfo.dateActive, typeFilterInfo?.typeActive, statusFilterInfo?.statusActive]?.filter(Boolean)?.length > 0
@@ -132,6 +106,7 @@ const Home = () => {
                 setDateFilterInfo={setDateFilterInfo}
                 setTypeFilterInfo={setTypeFilterInfo}
                 setStatusFilterInfo={setStatusFilterInfo}
+                onFilter={filterTransactions}
             />
             <div className="flex justify-between gap-[124px]">
                 <div className="w-full">

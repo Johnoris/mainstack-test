@@ -5,7 +5,7 @@ import CustomSelectInput from "../form-comps/customSelectInput";
 import DateFilter from "./dateFilter";
 import { DateObject } from "react-multi-date-picker";
 
-const Filter = ({ filterActive, setFilterActive, reference, startDate, setStartDate, endDate, setEndDate, clearFilters, selectedTransactionTypes, setSelectedTransactionTypes, selectedTransactionStatus, setSelectedTransactionStatus, setDateFilterInfo, setStatusFilterInfo, setTypeFilterInfo}: { 
+const Filter = ({ filterActive, setFilterActive, reference, startDate, setStartDate, endDate, setEndDate, clearFilters, selectedTransactionTypes, setSelectedTransactionTypes, selectedTransactionStatus, setSelectedTransactionStatus, setDateFilterInfo, setStatusFilterInfo, setTypeFilterInfo, onFilter}: { 
     filterActive: boolean,
     setFilterActive: Dispatch<SetStateAction<boolean>>,
     reference: RefObject<HTMLDivElement> | null,
@@ -31,6 +31,7 @@ const Filter = ({ filterActive, setFilterActive, reference, startDate, setStartD
         statusActive?: boolean,
         statusArray?: string[]
     }>>,
+    onFilter: () => void,
 }) => {
 
 
@@ -72,6 +73,7 @@ const Filter = ({ filterActive, setFilterActive, reference, startDate, setStartD
                         className="bg-black300 py-3 w-1/2 text-white text-base font-semibold leading-[24px] tracking-[0.4px] rounded-[100px]" 
                         //check for which filter exists and update state where necessary
                         onClick={() => {  
+                            onFilter()
                             startDate && endDate ? setDateFilterInfo({ dateActive: true, dateLowerLimit: startDate, dateUpperLimit: endDate }) : setDateFilterInfo({ dateActive: false, dateLowerLimit: null, dateUpperLimit: null })
                             selectedTransactionTypes.length > 0 ? setTypeFilterInfo({ typeActive: true, typeArray: selectedTransactionTypes }) : setTypeFilterInfo({ typeActive: false, typeArray: [] })
                             selectedTransactionStatus.length > 0 ? setStatusFilterInfo({ statusActive: true, statusArray: selectedTransactionStatus }) : setStatusFilterInfo({ statusActive: false, statusArray: [] })
